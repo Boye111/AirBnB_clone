@@ -18,12 +18,12 @@ class TestUser(unittest.TestCase):
         '''this test validate that creation proccess was correct.
         '''
 
-        data = {'id' : 3,
-            'fist_name' : 'Betty',
-            'last_name':'Holberton',
-            'password':'123',
-            'email':'correo@correo',
-            }
+        data = {'id': 3,
+                'fist_name': 'Betty',
+                'last_name': 'Holberton',
+                'password': '123',
+                'email': 'correo@correo',
+                }
 
         self.user = User(**data)
         self.assertEqual(self.user.id, 3)

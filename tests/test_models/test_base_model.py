@@ -8,8 +8,8 @@ from datetime import datetime, time
 from time import sleep
 import models
 
+
 class TestBaseModel_initialization(unittest.TestCase):
-    
     """ Unittests for the initialization of the BaseModel class """
     def test_no_initialization_args(self):
         self.assertEqual(BaseModel, type(BaseModel()))
@@ -43,66 +43,68 @@ class TestBaseModel_initialization(unittest.TestCase):
     def test_args_and_kwargs(self):
         t = datetime.today()
         t_form = t.isoformat()
-        mod = BaseModel("12", id="345", created_at=t_form, updated_at=t>
+        mod = BaseModel("12", id="345", created_at=t_form, updated_at=t)
         self.assertEqual(mod.id, "345")
         self.assertEqual(mod.created_at, t)
         self.assertEqual(mod.updated_at, t)
 
     def test_None_kwargs(self):
         with self.assertRaises(TypeError):
-                BaseModel(id=None, created_at=None, updated_at=None)
+            BaseModel(id=None, created_at=None, updated_at=None)
 
     def test_no_args(self):
         mod = BaseModel(None)
-            self.assertNotIn(None, bm.__dict__.values())
+        self.assertNotIn(None, bm.__dict__.values())
 
-class TestBaseModel_save(unittest.TestCase):                  
-        """ Unittests for the save method """
-        def test_save1(self):
-                mod = BaseModel()
-                sleep(0.05)
-                updated_at1 = mod.updated_at
-                mod.save()
-                self.assertLess(updated_at1, mod.updated_at)
 
-        def test_save2(self):
-                mod = BaseModel()
-                sleep(0.05)
-                updated1 = mod.updated_at
-                mod.save()
-                update2 = mod.updated_at
-                self.assertLess(updated1, update2)
-                sleep(0.05)
-                mod.save()
-                self.assertLess(update2, mod.update_at)
+class TestBaseModel_save(unittest.TestCase):
+    """ Unittests for the save method """
+    def test_save1(self):
+        mod = BaseModel()
+        sleep(0.05)
+        updated_at1 = mod.updated_at
+        mod.save()
+        self.assertLess(updated_at1, mod.updated_at)
+
+    def test_save2(self):
+        mod = BaseModel()
+        sleep(0.05)
+        updated1 = mod.updated_at
+        mod.save()
+        update2 = mod.updated_at
+        self.assertLess(updated1, update2)
+        sleep(0.05)
+        mod.save()
+        self.assertLess(update2, mod.update_at)
+
 
 class TestBaseModel_to_dict(unittest.TestCase):
-        """ unittests for to_dict method """
-        def test_dict_type(self):
-                mod = BaseModel()
-                self.assertTrue(dict, type(mod.to_dict()))
+    """ unittests for to_dict method """
+    def test_dict_type(self):
+        mod = BaseModel()
+        self.assertTrue(dict, type(mod.to_dict()))
 
-        def test_dict_keys(self):
-                mod = BaseModel()
-                mod_dict = mod.to_dict()
-                self.assertIn('id', mod_dict)
-                self.assertIn('created_at', mod_dict)
-                self.assertIn('updated_at', mod_dict)
-                self.assertIn('__class__', mod_dict)
+    def test_dict_keys(self):
+        mod = BaseModel()
+        mod_dict = mod.to_dict()
+        self.assertIn('id', mod_dict)
+        self.assertIn('created_at', mod_dict)
+        self.assertIn('updated_at', mod_dict)
+        self.assertIn('__class__', mod_dict)
 
-        def test_dict_sample(self):
-                t = datetime.today()
-                mod = BaseModel()
-                mod.id = '00'
-                mod.created_at = mod.updated_at = t
-                 dict = {
-                        'id': '00',
-                        '__class__': 'BaseModel',
-                        'created_at': t.isoformat(),
-                        'updated_at': t.isoformat()
-                        }
-                self.assertDictEqual(mod.to_dict(), dict)
+    def test_dict_sample(self):
+        t = datetime.today()
+        mod = BaseModel()
+        mod.id = '00'
+        mod.created_at = mod.updated_at = t
+        dict = {
+                'id': '00',
+                '__class__': 'BaseModel',
+                'created_at': t.isoformat(),
+                'updated_at': t.isoformat()
+                }
+        self.assertDictEqual(mod.to_dict(), dict)
 
 
 if __name__ == "__main__":
-        unittest.main()
+    unittest.main()
