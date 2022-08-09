@@ -2,19 +2,38 @@
 """
     This is a module test from BaseModel class and your methods.
 """
-import unittest
+from models.amenity import Amenity
+from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
 from models.state import State
+import pep8
+import unittest
 
 
-class TestState(unittest.TestCase):
+class Teststate(unittest.TestCase):
     """
-    this class test user class and your behavior
+    Unittests for the State class.
     """
 
-    def setUp(self):
-        self.state = State()
+    def test_pep8_conformance_state(self):
+        """Test that we conform to PEP8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/state.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
 
-    def test_creation(self):
-        '''this test validate that creation proccess was correct.
-        '''
-        self.assertEqual(self.State.name, '')
+    def test_class(self):
+        """
+        Tests if class is named correctly.
+        """
+        state1 = State()
+        self.assertEqual(state1.__class__.__name__, "State")
+
+    def test_father(self):
+        """
+        Tests if Class inherits from BaseModel.
+        """
+        state1 = State()
+        self.assertEqual(state1.__class__.__name__, "State")
