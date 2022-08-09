@@ -2,32 +2,24 @@
 """
     This is a module test from BaseModel class and your methods.
 """
+from models.amenity import Amenity
+from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+import pep8
 import unittest
-from models.user import User
 
 
-class TestUser(unittest.TestCase):
+class Testuser(unittest.TestCase):
     """
-    this class test user class and your behavior
+    Unittests for the User class.
     """
 
-    def setUp(self):
-        self.user = User()
-
-    def test_creation(self):
-        '''this test validate that creation proccess was correct.
-        '''
-
-        data = {'id': 3,
-                'fist_name': 'Betty',
-                'last_name': 'Holberton',
-                'password': '123',
-                'email': 'correo@correo',
-                }
-
-        self.user = User(**data)
-        self.assertEqual(self.user.id, 3)
-        self.assertEqual(self.user.first_name, 'Betty')
-        self.assertEqual(self.user.first_name, 'Holberton')
-        self.assertEqual(self.user.password, '123')
-        self.assertEqual(self.user.email, 'correo@correo')
+    def test_pep8_conformance_user(self):
+        """Test that we conform to PEP8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['models/user.py'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
